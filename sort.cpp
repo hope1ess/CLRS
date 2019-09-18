@@ -64,3 +64,34 @@ void merge_sort(int* a, int left, int right)
 	merge_sort(a, mid + 1, right);
 	merge(a, left, mid, right);
 }
+
+//quicksort
+int partition(int* a, int left, int right)
+{
+	int pivot = a[right];
+	int index = left;
+	for (int i = left; i < right; ++i)
+	{
+		if (a[i] <= pivot)
+		{
+			int temp = a[i];
+			a[i] = a[index];
+			a[index] = temp;
+			++index;
+		}
+	}
+	int temp = a[index];
+	a[index] = a[right];
+	a[right] = temp;
+	return index;
+}
+
+void quick_sort(int* a, int left, int right)
+{
+	if (left >= right)
+		return;
+	int pivot = partition(a, left, right);
+	quick_sort(a, left, pivot - 1);
+	quick_sort(a, pivot + 1, right);
+}
+
