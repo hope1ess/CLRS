@@ -95,3 +95,57 @@ void quick_sort(int* a, int left, int right)
 	quick_sort(a, pivot + 1, right);
 }
 
+//head_sort
+int heap_parent(int i)
+{
+	return ((i + 1) / 2 - 1);
+}
+
+int heap_left(int i)
+{
+	return i * 2 + 1;
+}
+
+int heap_right(int i)
+{
+	return i * 2 + 2;
+}
+
+void max_heapify(int* a, int heapSize, int i)
+{
+	int left = heap_left(i);
+	int right = heap_right(i);
+	/*if (left >= heapSize || right >= heapSize)
+		return;*/
+	int largest = i;
+	if (left < heapSize && a[largest] < a[left])
+		largest = left;
+	if (right < heapSize && a[largest] < a[right])
+		largest = right;
+	if (largest != i)
+	{
+		int temp = a[largest];
+		a[largest] = a[i];
+		a[i] = temp;
+		max_heapify(a, heapSize, largest);
+	}
+}
+
+void build_heap(int* a, int length)
+{
+	int nonLeaf = (length - 1) / 2;
+	for (int i = nonLeaf; i >= 0; --i)
+		max_heapify(a, length, i);
+}
+
+void heap_sort(int* a, int length)
+{
+	build_heap(a, length);
+	for (int i = length - 1; i > 0; --i)
+	{
+		int temp = a[i];
+		a[i] = a[0];
+		a[0] = temp;
+		max_heapify(a, --length, 0);
+	}
+}
