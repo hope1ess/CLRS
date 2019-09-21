@@ -4,7 +4,15 @@ CLRS DP's demo
 //cut_rod
 #include "Yalgorithm.h"
 #include <algorithm>
+#include <iostream>
 using namespace std;
+
+struct cut_rod_ext
+{
+	int* s;
+	int r;
+};
+
 //cut_road top-down
 int memoized_cut_rod_aux(int* p, int n, int* r)
 {
@@ -44,4 +52,26 @@ int bottom_up_cut_rod(int* p, int n)
 		r[j] = q;
 	}
 	return r[n];
+}
+
+cut_rod_ext extended_bottom_up_cut_rod(int* p, int n)
+{
+	int* r = new int[n + 1];
+	int* s = new int[n + 1];
+	r[0] = 0;
+	for (int j = 1; j <= n; ++j)
+	{
+		int q = -1;
+		for (int i = 1; i <= j; ++i)
+			if (q < p[i] + r[j - i])
+			{
+				q = p[i] + r[j - i];
+				s[j] = i;
+			}
+		r[j] = q;
+	}
+	cut_rod_ext res;
+	res.r = r[n];
+	res.s = s;
+	return res;
 }

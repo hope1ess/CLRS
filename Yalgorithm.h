@@ -1,6 +1,11 @@
 /*
 add in 2019/9/17 by yjy
 */
+//strcut
+struct cut_rod_ext;
+
+
+//algorithm
 void insert_sort(int* a, int length);
 void insert_sort_no_asc(int* a, int length);
 void quick_sort(int* a, int left, int right);
@@ -13,4 +18,5 @@ void heap_sort(int* a, int length);
 int memoized_cut_rod_aux(int* p, int n, int* r);
 int memoized_cut_rod(int* p, int n);
 int bottom_up_cut_rod(int* p, int n);
+cut_rod_ext extended_bottom_up_cut_rod(int* p, int n);
 
