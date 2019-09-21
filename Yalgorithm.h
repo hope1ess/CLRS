@@ -10,3 +10,7 @@ int heap_right(int i);
 void max_heapify(int* a, int heapSize, int i);
 void build_heap(int* a, int length);
 void heap_sort(int* a, int length);
+int memoized_cut_rod_aux(int* p, int n, int* r);
+int memoized_cut_rod(int* p, int n);
+int bottom_up_cut_rod(int* p, int n);
+
